@@ -3,8 +3,12 @@
 <layout>
     <data>
         <variable
-            name=""
-            type="" />
+            name="viewmodel"
+            type="com.saurav.mvvm_architecture2.viewmodel.ViewModel" />
+
+        <variable
+            name="mcontext"
+            type="com.saurav.mvvm_architecture2.activity.MainActivity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -12,17 +16,41 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity">
+        tools:context=".activity.MainActivity">
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hello World!"
+            android:text='@{viewmodel.textData,default="Default text"}'
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:imageUrl="@{viewmodel.imageUrl}"
+            app:context="@{mcontext}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/edtxt"/>
+
+        <EditText
+            android:id="@+id/edtxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@={viewmodel.edtxt}"
+            android:hint="Email"
+            app:layout_constraintBottom_toTopOf="@id/textView"/>
+
+        <Button
+            android:id="@+id/btnOk"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text='@{viewmodel.btnName,default="Ok"}'
+            android:onClick="@{viewmodel::onClick}"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
